@@ -1,0 +1,222 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <title>Add Player</title>
+  </head>
+  <body>
+    <div id="wholeContend">
+      <div id="topContent">
+        <div id="logo">
+          <div id="logoImg"></div>
+        </div>
+        <div id="header">Poeltl</div>
+        <div id="loginTop">EDIT</div>
+        <div id="Login">ADD</div>
+      </div>
+      <div id="botContent">
+        <div id="form">
+            <input class="inputs fields" id="name" placeholder=" Player name" />
+          <input class="inputs fields" id="region" placeholder=" Region" />
+          <input class="inputs fields" id="club" placeholder=" Club" />
+          <input class="inputs fields" id="position" placeholder=" Position" />
+          <input class="inputs fields" id="height" placeholder=" Height" />
+          <input class="inputs fields" id="DOB" placeholder=" DOB" />
+          <input class="inputs fields" id="jerseyNumber" placeholder=" Jersey number" />
+          <input type="file" id="addImageFile" />
+          <img id="addImageBtn"></img>
+          <input class="inputs" id="submit" type="submit" value="Add player" />
+        </div>
+      </div>
+    </div>
+  </body>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins";
+    }
+    #addImageBtn{
+      width: 50px;
+      height: 50px;
+    }
+    #topContent {
+      width: 100%;
+      height: 15%;
+      display: flex;
+      color: #4c9dfb;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.5em;
+      background-color: #f6f6f6;
+    }
+    #logo {
+      flex: 1;
+    }
+    #logoImg {
+        background: red;
+      width: 50px;
+      height: 50px;
+      margin-left: 25px;
+      background-size: cover;
+    }
+    #header {
+      flex: 10;
+    }
+    #loginTop{
+      flex:1;
+      margin:20px;
+      cursor: pointer;
+    }
+    #login {
+      flex: 1;
+    }
+    #botContent {
+      height: 85%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 5%;
+    }
+    #form {
+      width: 40%;
+      height: 80%;
+      border-radius: 20px;
+      background-color: #f6f6f6;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    .fields {
+      background-color: rgba(76, 157, 251, 0.2);
+      outline: none;
+      border: none;
+      border-radius: 8px;
+      height: 50px;
+    }
+
+    .inputs {
+      display: block;
+      width: 70%;
+      color: rgba(76, 157, 251, 0.7);
+      font-weight: bold;
+      font-size: 1em;
+      padding-left: 20px;
+    }
+    
+    #submit {
+      background-color: #4c9dfb;
+      border-radius: 10px;
+      border: none;
+      height: 50px;
+      color: white;
+      font-family: "Poppins";
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+  <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-analytics.js";
+      import {
+        getDatabase,
+        set,
+        push,
+        onValue,
+        ref as ref_database,
+      } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+      import { getStorage, uploadBytes, ref as ref_storage, } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
+      const firebaseConfig = {
+      apiKey: "AIzaSyAMN-gRjeP7hTwJt8nIrwHsFZN9OJo4fgI",
+      authDomain: "poeltl.firebaseapp.com",
+      databaseURL: "https://poeltl-default-rtdb.firebaseio.com",
+      projectId: "poeltl",
+      storageBucket: "poeltl.appspot.com",
+      messagingSenderId: "751398034970",
+      appId: "1:751398034970:web:d9d3b0410928e2d4117ba3",
+      measurementId: "G-H2XRST88ED"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const storage = getStorage(app);
+    const db = getDatabase();
+      $("#loginTop").click(function(){
+        window.location = "index.html";
+      })
+      var image;
+      var counter = 0;
+      $(document).ready(function () {
+
+
+
+        document
+          .querySelector('input[type="file"]')
+          .addEventListener("change", function () {
+            if (this.files && this.files[0]) {
+              var img = document.querySelector("img");
+              img.onload = () => {
+                image = this.files[0];
+                URL.revokeObjectURL(img.src); // no longer needed, free memory
+              };
+              img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+              
+            }
+          });
+        });
+      
+      
+      $("#submit").click(function(){
+        var region = document.getElementById("region").value;
+        var name = document.getElementById("name").value;
+        var club = document.getElementById("club").value;
+        var position = document.getElementById("position").value;
+        var DOB = document.getElementById("DOB").value;
+        var height = document.getElementById("height").value;
+        var jerseyNumber = document.getElementById("jerseyNumber").value;
+        writeUserData(name, region, club, position, height, DOB, jerseyNumber);
+      })
+      function writeUserData(name, region, club, position, height, DOB, jerseyNumber) {
+        
+        var p = push(ref_database(db), {
+          name: name,
+          region: region,
+          club: club,
+          position: position,
+          height: height,
+          DOB: DOB,
+          jerseyNumber: jerseyNumber
+        });
+        console.log(p.key);
+        setTimeout(
+          function() {
+        const storageRef = ref_storage(storage, 'players/' + name +"/image.svg");
+        uploadBytes(storageRef, image).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+        });
+          },2000);
+        alert("Player added!")
+        var region = document.getElementById("region").value = "";
+        var name = document.getElementById("name").value = "";
+        var club = document.getElementById("club").value = "";
+        var position = document.getElementById("position").value = "";
+        var DOB = document.getElementById("DOB").value = "";
+        var height = document.getElementById("height").value = "";
+        var jerseyNumber = document.getElementById("jerseyNumber").value = "";
+      }
+  </script>
+</html>

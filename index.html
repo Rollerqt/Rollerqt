@@ -1,0 +1,642 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link href="http://fonts.cdnfonts.com/css/norwester" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <title>Guess the player</title>
+  </head>
+  <div id="topBar">
+    <div id="afl"></div>
+    <p>NRL</p>
+    <p>A-LEAGUE</p>
+    <p>BIG BASH</p>
+    <p>NBL</p>
+    <p>SUPER RUGBY</p>
+    <p id ="howToPlay">HOW TO PLAY</p>
+  </div>
+  <div id="htpScreen">
+    <p>Guess the mystery player!</p>
+    • You get eight guesses, try any current AFL player! <br>
+    • Green in any column indicates a match.<br>
+    • Yellow in the position column indicates a partial match to the mystery player’s position.<br>
+    • Yellow in the height column indicates the height is within 5cm of the mystery player’s height.<br>
+    • Yellow in the age or number category indicates this attribute is within 2 of the mystery player. Notes <br>
+    • Only current AFL players who have played an AFL game are included. <br>
+    • Positions are based on champion data statistics, this is the same data used for AFL Fantasy, SuperCoach, etc.</div>
+    <div id="endPopup">
+      <div id="imageDiv">
+        <img id="playerImage">
+      </div>
+      <p class="twoTexts" id="congrats">Congratulations! The correct answer is</p>
+      <p class="twoTexts" id="endName">SHAKE MILTON</p>
+      <div id="tryAgainBtn"><p>TRY AGAIN</p></div>
+    </div>
+  <div id="botContent">
+    <div id="botTop">
+      <div id="gtp">
+        <img src="images/logo1.svg">
+      </div>
+      <div id="dailyLimit">
+        <div class="dl" id="daily"><p>Daily Challenge</p></div>
+        <div class="dl" id="unlimited"><p>Unlimited Play</p></div>
+      </div>
+      <input class="inputs fields" id="chanceInput" placeholder=" Chance 1 of 8" />
+   </div>
+   <div id="botBot">
+      <div class="topPlayer">
+        <div class="topPart" id="nameTop">Name</div>
+        <div class="topPart" id="clubTop">Club</div>
+        <div class="topPart" id="regionTop">Region</div>
+        <div class="topPart" id="positionTop">Position</div>
+        <div class="topPart" id="ageTop">Age</div>
+        <div class="topPart" id="heightTop">Height</div>
+        <div class="topPart" id="jerseyNumberTop">#</div>
+      </div>
+      <div id="playersContainer">
+        <div class="onePlayer">
+          <div id="name">AAAAA</div>
+          <div class="onePart" id="club">
+            <img src="images/arrowUp.svg" id="clubImg">
+            <div id="clubText"></div>
+          </div>
+          <div class="onePart" id="region">sasa</div>
+          <div class="onePart" id="position">CF</div>
+          <div class="onePart" id="age">
+            <div id="ageText"></div>
+            <img src="images/arrowUp.svg" id="ageImg">
+          </div>
+          <div class="onePart" id="height">
+            <div id="heightText"></div>
+            <img src="images/arrowUp.svg" id="heightImg">
+          </div>
+          <div class="onePart" id="jerseyNumber">
+            <div id="jerseyNumberText"></div>
+            <img src="images/arrowUp.svg" id="jerseyNumberImg">
+          </div>
+        </div>
+        </div>
+        
+      </div>
+   </div>
+
+  </div>
+  <div id="footer">
+    <img src="images/logo.png">
+  </div>
+  <body>
+    
+  </body>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins";
+      background-color: #fbfcfd;
+    }
+    #endPopup{
+      width: 100vw;
+      height: 80vh;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #playerImage{
+      width: 300px;
+      height: 300px;
+    }
+    .twoTexts{
+      font-family: 'Montserrat' !important;
+    }
+    #endName{
+      font-size: 2em;
+      margin-top: 0;
+    }
+    #tryAgainBtn{
+      width: 150px;
+      height: 60px;
+      border: 1px solid #545454;
+      background-color: #7ed957;
+      color: #545454;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat';
+      font-weight: bold;
+    }
+    #footer{
+      width: 100vw;
+      height: 8vh;
+      background-color: #545454;
+      position: fixed;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #footer img{
+      width: 130px;
+      height: 100px;
+    }
+    #topBar{
+      width: 100vw;
+      height: 10vh;
+      background-color: #545454;
+      color: white;
+      font-family: "Norwester";
+      font-weight: bold;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #afl{
+      background: url("images/AFL-Logo.png");
+      background-size:cover;
+      cursor: pointer;
+      width: 75px;
+      height: 50px;
+      margin-right: 15px;
+    }
+    #topBar p{
+      margin-left: 15px;
+      margin-right: 15px;
+      cursor: pointer;
+    }
+    #htpScreen{
+      font-family: "Montserrat";
+      font-weight: bold;
+      color: #545454;
+      font-size: 1.2em;
+      width: 40vw;
+      height: 70vh;
+      margin-left: 30vw;
+      margin-top: 20vh;
+      display: none;
+    }
+    #botContent{
+      width: 100vw;
+      height: 80vh;
+    }
+    #botTop{
+      width: 100vw;
+      height: 50vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #dailyLimit{
+      width: 40vw;
+      height: 10vh;
+      display: flex;
+    }
+    #daily p:hover{
+      background-color: #7ed957;
+      border: 1px solid #545454;
+      padding: 10px;
+      font-family: 'Montserrat';
+    }
+    .dl{
+      flex:1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #545454;
+    }
+    .dl p{
+      cursor: pointer;
+      font-family: 'Montserrat';
+    }
+    #unlimited p{
+      background-color: #7ed957;
+      border: 1px solid #545454;
+      padding: 10px;
+      font-family: 'Montserrat';
+    }
+    #gtp{
+      font-family: "Poppins";
+      font-weight: bold;
+      font-size: 2em;
+      color: #4c9dfb;
+    }
+    #gtp img{
+      width: 300px;
+      height: 200px;
+    }
+    .fields {
+      outline: none;
+      border: none;
+      height: 60px;
+    }
+    .inputs {
+      display: block;
+      width: 35%;
+      color: grey;
+      font-weight: bold;
+      font-size: 1em;
+      padding-left: 20px;
+      border: 2px solid #545454;
+      font-family: 'Montserrat';
+    }
+    ::placeholder {
+      color: grey;
+      font-family: "Montserrat";
+      font-weight: bold;
+      font-weight: 1em;
+    }
+    #botBot{
+      font-family: 'Montserrat' !important;
+      width: 100vw;
+      height: 40vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: -50px;
+    }
+    #playersContainer{
+      width: 1000px;
+      height: 200px;
+      overflow-y: scroll;
+    }
+    .onePlayer{
+      width: 100%;
+      height: 35%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background-color: lightgrey;
+      border-bottom: 1px solid grey;
+    }
+    .addFlex{
+      display: flex !important;
+    }
+    #name{
+      flex:3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: white;
+    }
+    #region{
+      flex:1.5;
+    }
+    #regionTop{
+      flex:1.5;
+    }
+    #club{
+      flex:1.5;
+    }
+    #clubTop{
+      flex:1.5;
+    }
+    .onePart{
+      flex:1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-family: "Montserrat";
+      font-weight: bold;
+    }
+    .topPlayer{
+      width: 1000px;
+      height: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #nameTop{
+      flex:3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #age{
+      display: flex;
+      flex-direction: column;
+    }
+    #ageImg{
+      width: 15px;
+      height: 15px;
+    }
+    #height{
+      display: flex;
+      flex-direction: column;
+    }
+    #heightImg{
+      width: 15px;
+      height: 15px;
+    }
+    #jerseyNumber{
+      display: flex;
+      flex-direction: column;
+    }
+    #jerseyNumberImg{
+      width: 15px;
+      height: 15px;
+    }
+    #club{
+      display: flex;
+      flex-direction: column;
+    }
+    #clubImg{
+      width: 30px;
+      height: 30px;
+    }
+    #clubText{
+      font-size: 0.85em;
+    }
+    .topPart{
+      flex:1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid grey;
+    }
+    #howToPlay{
+      position: absolute;
+      font-family: "Norwester";
+      font-weight: bold;
+      font-size: 1em;
+      right: 20;
+      cursor: pointer;
+    }
+  </style>
+  <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-analytics.js";
+      import {
+        onValue,
+        getDatabase,
+        set,
+        push,
+        ref,
+      } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+      import { getStorage, uploadBytes, } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
+        const firebaseConfig = {
+        apiKey: "AIzaSyAMN-gRjeP7hTwJt8nIrwHsFZN9OJo4fgI",
+        authDomain: "poeltl.firebaseapp.com",
+        databaseURL: "https://poeltl-default-rtdb.firebaseio.com",
+        projectId: "poeltl",
+        storageBucket: "poeltl.appspot.com",
+        messagingSenderId: "751398034970",
+        appId: "1:751398034970:web:d9d3b0410928e2d4117ba3",
+        measurementId: "G-H2XRST88ED"
+        };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+      const db = getDatabase();
+      var usernames = [];
+      var clubs = [];
+      var regions = [];
+      var positions = [];
+      var ages = [];
+      var heights = [];
+      var jerseyNumbers = [];
+      var counter = 0;
+      var chance = 1;
+      var rightUsername = "";
+      var rightClub = "";
+      var rightRegion = "";
+      var rightPosition = "";
+      var rightAge = "";
+      var rightHeight = "";
+      var rightJerseyNumber = "";
+      $(document).ready(function () {
+      const usersRef = ref(db);
+            onValue(usersRef, (snapshot) => {
+            snapshot.forEach(function (child){
+            counter++;
+                var username = child.child("name").val();
+                usernames.push(username);
+                clubs.push(child.child("club").val());
+                regions.push(child.child("region").val());
+                positions.push(child.child("position").val());
+                ages.push(child.child("DOB").val());
+                heights.push(child.child("height").val());
+                jerseyNumbers.push(child.child("jerseyNumber").val());
+            });
+            });
+            setTimeout(
+        function() {
+            var random = Math.floor(Math.random() * counter);
+            rightUsername = usernames[random];
+            rightClub = clubs[random];
+            rightPosition = positions[random];
+            rightRegion = regions[random];
+            rightAge = ages[random];
+            rightJerseyNumber = jerseyNumbers[random];
+            rightHeight = heights[random];
+            console.log(rightUsername);
+            console.log(rightAge);
+            console.log(rightPosition);
+            console.log(rightRegion);
+            console.log(rightClub);
+            console.log(rightHeight);
+            console.log(rightJerseyNumber);
+
+            var img = new Image();
+                var username = rightUsername.replace(/\s+/g,"%20");
+                var club = rightClub.replace(/\s+/g,"%20");
+                var loc = "images/AFLPlayers/"+ club +"Players/"+ username + ".png";
+                img.src = loc;
+                document.getElementById("playerImage").src = loc;
+                document.getElementById("endName").innerHTML = rightUsername;
+
+            var today = new Date();
+                        var dd = String(today.getDate());
+                        var mm = String(today.getMonth() + 1);
+                        var yyyy = today.getFullYear();
+                        var dobArrray = ages[random].split("-");
+                        rightAge = yyyy - dobArrray[2];
+                        if(dobArrray[0] > mm){
+                          rightAge--;
+                        }else if(dobArrray[0] == mm){
+                          if(parseInt(dobArrray[1]) > parseInt(dd)){
+                            rightAge--;
+                          }
+                        }else{
+
+                        }
+            console.log(rightAge);
+        },1000);
+      });
+      var htpBul = false;
+      $(document).on("click", "#tryAgainBtn", function(){
+        location.reload();
+      });
+      $(document).on("click", "#howToPlay", function(){
+        if(!htpBul){
+          document.getElementById("htpScreen").style.display = "block";
+          document.getElementById("botContent").style.display = "none";
+        }else{
+          document.getElementById("htpScreen").style.display = "none";
+          document.getElementById("botContent").style.display = "block";
+        }
+        htpBul = !htpBul;
+      });
+      var found = false;
+      var input = document.getElementById("chanceInput");
+      input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          if (input.value != "") {
+            if(input.value == rightUsername){
+              console.log("TACAN");
+              found = true;
+              document.getElementById("endPopup").style.display = "flex";
+              document.getElementById("botContent").style.display = "none";
+            }
+            const usersRef = ref(db);
+            onValue(usersRef, (snapshot) => {
+            snapshot.forEach(function (child){
+                var username = child.child("name").val();
+                if(username == input.value){
+                var div = document.querySelector(".onePlayer"),
+                        clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+                        clone.classList.add("addFlex");
+                        var today = new Date();
+                        var dd = String(today.getDate());
+                        var mm = String(today.getMonth() + 1);
+                        var yyyy = today.getFullYear();
+                        var dobArrray = child.child("DOB").val().split("-");
+                        var age = yyyy - dobArrray[2];
+                        if(dobArrray[0] > mm){
+                          age--;
+                          // console.log("OVDE SAM");
+                        }else if(dobArrray[0] == mm){
+                          console.log(dd);
+                          console.log(dobArrray[1]);
+                          if(parseInt(dobArrray[1]) > parseInt(dd)){
+                            console.log("EVO ME");
+                            age--;
+                          }
+                        }else{
+
+                        }
+                        var positionArray = [];
+                        if(child.child("position").val().length > 3){
+                          
+                          positionArray = child.child("position").val().split("-");
+                          // console.log(positionArray);
+                        }else{
+                          positionArray.push(child.child("position").val());
+                        }
+                        var positionArray1 = [];
+                        if(rightPosition.length >3){
+                          positionArray1 = rightPosition.split("-");
+                        }else{
+                          positionArray1.push(rightPosition);
+                        }
+                        if(child.child("name").val() == rightUsername){
+                          clone.children[0].style.backgroundColor = "#7ed957";
+                        }
+                        if(child.child("club").val() == rightClub){
+                          clone.children[1].style.backgroundColor = "#7ed957";
+                        }
+                        if(child.child("region").val() == rightRegion){
+                          clone.children[2].style.backgroundColor = "#7ed957";
+                        }
+                        if(child.child("position").val() == rightPosition){
+                          clone.children[3].style.backgroundColor = "#7ed957";
+                        }else{
+                          for(var i = 0; i<positionArray.length;i++){
+                            for(var j = 0; j<positionArray1.length;j++){
+                              if(positionArray[i] == positionArray1[j]){
+                                console.log(positionArray[i]);
+                                console.log(positionArray1[j]);
+                                clone.children[3].style.backgroundColor = "#fff000";
+                              }
+                            }
+                          }
+                        }
+                        if(age == rightAge){
+                          clone.children[4].style.backgroundColor = "#7ed957";
+                          clone.children[4].children[1].style.display = "none";
+                        }
+                        else{
+                          if(Math.abs(age - rightAge) < 2){
+                            clone.children[4].style.backgroundColor = "#fff000";
+                          }
+                          if(age>rightAge){
+                            clone.children[4].children[1].setAttribute("style", "transform: rotate(" + 180 + "deg)");
+                          }
+                        }
+                        var h = child.child("height").val().slice(0,-2);
+                          var h1 = rightHeight.slice(0,-2);
+                          console.log(h);
+                          console.log(h1);
+                          console.log("TO");
+                        if(parseInt(h) == parseInt(h1)){
+                          clone.children[5].style.backgroundColor = "#7ed957";
+                          clone.children[5].children[1].style.display = "none";
+                        }else{
+                          
+                          console.log(h);
+                          console.log(h1);
+                          if(Math.abs(h-h1) < 6){
+                            clone.children[5].style.backgroundColor = "#fff000";
+                          }
+                          if(h > h1){
+                            clone.children[5].children[1].setAttribute("style", "transform: rotate(" + 180 + "deg)");
+                          }
+                        }
+                        if(parseInt(child.child("jerseyNumber").val()) == parseInt(rightJerseyNumber)){
+                          clone.children[6].style.backgroundColor = "#7ed957";
+                          clone.children[6].children[1].style.display = "none";
+                          console.log("tu sam");
+                        }else{
+                          if(Math.abs(child.child("jerseyNumber").val() - rightJerseyNumber) < 2){
+                            clone.children[6].style.backgroundColor = "#fff000";
+                          }
+                          if(child.child("jerseyNumber").val() > rightJerseyNumber){
+                            clone.children[6].children[1].setAttribute("style", "transform: rotate(" + 180 + "deg)");
+                          }
+                        }
+                        
+                        clone.children[0].innerHTML = username;
+                        clone.children[1].children[0].setAttribute("src", "images/"+child.child("club").val()+".png");
+                        clone.children[1].children[1].innerHTML = child.child("club").val();
+                        clone.children[2].innerHTML = child.child("region").val();
+                        clone.children[3].innerHTML = child.child("position").val();
+                        clone.children[4].children[0].innerHTML = age;
+                        clone.children[5].children[0].innerHTML = child.child("height").val();
+                        clone.children[6].children[0].innerHTML = child.child("jerseyNumber").val();
+                  document.getElementById("playersContainer").appendChild(clone);
+                  document.getElementById("playersContainer").scrollTop = document.getElementById("playersContainer").scrollHeight;
+                }
+            });
+            });
+          }
+          setTimeout(
+          function() {
+                        chance++;
+                        if(chance == 9 && !found){
+                          document.getElementById("endPopup").style.display = "flex";
+                          document.getElementById("botContent").style.display = "none";
+                          document.getElementById("congrats").innerHTML = "Sorry! The correct answer is";
+                        }
+                        input.value = "";
+                        input.placeholder = "Chance "+chance + " of 8"
+          },1000);
+                  
+        }
+      });
+  </script>
+</html>
