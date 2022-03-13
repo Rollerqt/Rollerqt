@@ -13,13 +13,30 @@
     <title>Guess the player</title>
   </head>
   <div id="topBar">
-    <div id="afl"></div>
-    <p>NRL</p>
-    <p>A-LEAGUE</p>
-    <p>BIG BASH</p>
-    <p>NBL</p>
-    <p>SUPER RUGBY</p>
-    <p id ="howToPlay">HOW TO PLAY</p>
+    <div id="afl">
+      <p id="aflText">AFL</p>
+      <p id="stats">STATS</p>
+    </div>
+    <div id="moreSports">
+      <p id="comSoon">Coming soon</p>
+      <p>MORE SPORTS</p>
+    </div>
+  </div>
+  <div id="statsScreen">
+    <div id="statsContainer">
+      <div id="xStats"><p id="xStatsBtn">X</p></div>
+      <p id="statsHeader">STATS</p>
+      <div id="games">
+        <div id="gamesPlayed">
+          <p class="played">Games played</p>
+          <p id="gamesPlayedNumber">10</p>
+        </div>
+        <div id="gamesWon">
+          <p class="played">Games won</p>
+          <p id="gamesWonNumber">6</p>
+        </div>
+      </div>
+    </div>
   </div>
   <div id="htpScreen">
     <p>Guess the mystery player!</p>
@@ -44,10 +61,21 @@
         <img src="images/logo1.svg">
       </div>
       <div id="dailyLimit">
-        <div class="dl" id="daily"><p>Daily Challenge</p></div>
+        <div class="dl" id="daily">
+          <p id="comingSoon">Coming soon</p>
+          <p id="dailyDown">Daily Challenge</p>
+        </div>
         <div class="dl" id="unlimited"><p>Unlimited Play</p></div>
       </div>
-      <input class="inputs fields" id="chanceInput" placeholder=" Chance 1 of 8" />
+      <div id="inputDiv">
+        <div id="aflLogoDiv">
+          <img src="images/AFL-Logo.png">
+        </div>
+        <input class="inputs fields" id="chanceInput" placeholder=" Guess 1 of 8" />
+        <div id="htpBtn">
+          <div id="htpButton">?</div>
+        </div>
+      </div>
    </div>
    <div id="botBot">
       <div class="topPlayer">
@@ -157,13 +185,63 @@
       align-items: center;
       justify-content: center;
     }
+    #moreSports{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #moreSports p{
+      flex:1;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    #comSoon{
+      font-family: 'Montserrat';
+      font-size: 0.5em;
+      border: 1px solid red;
+      color: red;
+      border-radius: 3px;
+      padding: 2px;
+    }
     #afl{
-      background: url("images/AFL-Logo.png");
       background-size:cover;
       cursor: pointer;
-      width: 75px;
-      height: 50px;
       margin-right: 15px;
+      background-color: #7ed957;
+      height: 160%;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    }
+    #aflText{
+      /* flex:2; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    #stats{
+      /* flex:1; */
+      display: flex;
+      justify-content: flex-end;
+      font-size: 0.5em;
+      margin: 0;
+    }
+    #games{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #gamesPlayed{
+      margin-right: 30px;
+      font-size: 0.8em;
+    }
+    #gamesWon{
+      margin-left: 30px;
+      font-size: 0.8em;
     }
     #topBar p{
       margin-left: 15px;
@@ -180,6 +258,35 @@
       margin-left: 30vw;
       margin-top: 20vh;
       display: none;
+    }
+    #statsScreen{
+      width: 40vw;
+      height: 35vh;
+      margin-left: 30vw;
+      margin-top: 15vh;
+      border: 1px solid #545454;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+    }
+    #xStats{
+      display: flex;
+      justify-content: end;
+      margin: 0;
+    }
+    #statsHeader{
+      margin-top: 5px;
+    }
+    #xStats p{
+      margin: 0;
+      margin-right: 10px;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+    #statsScreen p{
+      font-family: 'Montserrat';
+      font-size: 2em;
+      color: #545454;
     }
     #botContent{
       width: 100vw;
@@ -198,11 +305,26 @@
       height: 10vh;
       display: flex;
     }
-    #daily p:hover{
+    #dailyDown:hover{
       background-color: #7ed957;
       border: 1px solid #545454;
       padding: 10px;
       font-family: 'Montserrat';
+    }
+    #daily{
+      display: flex;
+      flex-direction: column;
+    }
+    #daily p{
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    #comingSoon{
+      color: red;
+      font-size: 0.7em;
+      border: 1px solid red;
+      padding: 2px;
+      border-radius: 3px;
     }
     .dl{
       flex:1;
@@ -236,7 +358,42 @@
       border: none;
       height: 60px;
     }
+    #inputDiv{
+      width: 50%;
+      display: flex;
+    }
+    #aflLogoDiv{
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #aflLogoDiv img{
+      width: 70px;
+      height: 50px;
+    }
+    #htpBtn{
+      flex:1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #htpButton{
+      width: 30px;
+      height: 30px;
+      border: 1px solid #545454;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    #htpButton:hover{
+      background-color: #545454;
+      color: white;
+    }
     .inputs {
+      flex:5;
       display: block;
       width: 35%;
       color: grey;
@@ -418,6 +575,8 @@
       var rightHeight = "";
       var rightJerseyNumber = "";
       $(document).ready(function () {
+        // localStorage.setItem('gamesPlayed', 0);
+        // localStorage.setItem('gamesWon',0);
       const usersRef = ref(db);
             onValue(usersRef, (snapshot) => {
             snapshot.forEach(function (child){
@@ -474,13 +633,23 @@
 
                         }
             console.log(rightAge);
-        },1000);
+        },1500);
       });
       var htpBul = false;
       $(document).on("click", "#tryAgainBtn", function(){
         location.reload();
       });
-      $(document).on("click", "#howToPlay", function(){
+      $(document).on("click", "#xStatsBtn", function(){
+        document.getElementById("statsScreen").style.display = "none";
+        document.getElementById("botContent").style.display = "block";
+      });
+      $(document).on("click", "#stats", function(){
+        document.getElementById("gamesPlayedNumber").innerHTML = localStorage.getItem('gamesPlayed');
+        document.getElementById("gamesWonNumber").innerHTML = localStorage.getItem('gamesWon');
+        document.getElementById("statsScreen").style.display = "block";
+        document.getElementById("botContent").style.display = "none";
+      });
+      $(document).on("click", "#htpButton", function(){
         if(!htpBul){
           document.getElementById("htpScreen").style.display = "block";
           document.getElementById("botContent").style.display = "none";
@@ -495,8 +664,15 @@
       input.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
           event.preventDefault();
+          console.log(input.value.length);
+          console.log(rightUsername.length);
+          console.log(input.value.replace(/\s+/g, "") == rightUsername.replace(/\s+/g, ""));
           if (input.value != "") {
-            if(input.value == rightUsername){
+            if(input.value.replace(/\s+/g, "") == rightUsername.replace(/\s+/g, "")){
+              localStorage.setItem('gamesPlayed', parseInt(localStorage.getItem('gamesPlayed'))+1);
+              localStorage.setItem('gamesWon', parseInt(localStorage.getItem('gamesWon'))+1);
+              console.log(localStorage.getItem('gamesPlayed'));
+              console.log(localStorage.getItem('gamesWon'));
               console.log("TACAN");
               found = true;
               document.getElementById("endPopup").style.display = "flex";
@@ -506,7 +682,7 @@
             onValue(usersRef, (snapshot) => {
             snapshot.forEach(function (child){
                 var username = child.child("name").val();
-                if(username == input.value){
+                if(username.replace(/\s+/g, "") == input.value.replace(/\s+/g, "")){
                 var div = document.querySelector(".onePlayer"),
                         clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
                         clone.classList.add("addFlex");
@@ -630,9 +806,11 @@
                           document.getElementById("endPopup").style.display = "flex";
                           document.getElementById("botContent").style.display = "none";
                           document.getElementById("congrats").innerHTML = "Sorry! The correct answer is";
+                          localStorage.setItem('gamesPlayed', parseInt(localStorage.getItem('gamesPlayed'))+1);
+                          console.log(localStorage.getItem('gamesPlayed'));
                         }
                         input.value = "";
-                        input.placeholder = "Chance "+chance + " of 8"
+                        input.placeholder = "Guess "+chance + " of 8"
           },1000);
                   
         }
