@@ -698,6 +698,7 @@
       });
       $(document).on("click", "#stats", function(){
         console.log(localStorage.getItem('gamesPlayed'));
+        console.log("NOVO");
         document.getElementById("gamesPlayedNumber").innerHTML = localStorage.getItem('gamesPlayed');
         document.getElementById("gamesWonNumber").innerHTML = localStorage.getItem('gamesWon');
         document.getElementById("statsScreen").style.display = "block";
