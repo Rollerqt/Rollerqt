@@ -624,8 +624,10 @@
       var rightHeight = "";
       var rightJerseyNumber = "";
       $(document).ready(function () {
+        if(localStorage.getItem('gamesPlayed') == null || localStorage.getItem('gamesPlayed') == undefined){
         localStorage.setItem('gamesPlayed', 0);
         localStorage.setItem('gamesWon',0);
+        }
       const usersRef = ref(db);
             onValue(usersRef, (snapshot) => {
             snapshot.forEach(function (child){
@@ -699,6 +701,7 @@
       $(document).on("click", "#stats", function(){
         console.log(localStorage.getItem('gamesPlayed'));
         console.log("NOVO");
+        
         document.getElementById("gamesPlayedNumber").innerHTML = localStorage.getItem('gamesPlayed');
         document.getElementById("gamesWonNumber").innerHTML = localStorage.getItem('gamesWon');
         document.getElementById("statsScreen").style.display = "block";
