@@ -39,14 +39,25 @@
     </div>
   </div>
   <div id="htpScreen">
-    <p>Guess the mystery player!</p>
-    • You get eight guesses, try any current AFL player! <br>
-    • Green in any column indicates a match.<br>
-    • Yellow in the position column indicates a partial match to the mystery player’s position.<br>
-    • Yellow in the height column indicates the height is within 5cm of the mystery player’s height.<br>
-    • Yellow in the age or number category indicates this attribute is within 2 of the mystery player. Notes <br>
-    • Only current AFL players who have played an AFL game are included. <br>
-    • Positions are based on champion data statistics, this is the same data used for AFL Fantasy, SuperCoach, etc.</div>
+      <div id="htpIn">
+        <div id="htpX"><p id="htpXBtn">X</p></div>
+        <div id="htpBoth">
+        <div id="htpLeft">
+      <p>Guess the mystery player!</p>
+      • You get eight guesses, try any current AFL player! <br>
+      • <span class="green">Green in any column</span> indicates a match.<br><br>
+      • <span class="yellow">Yellow in the position column</span> indicates a partial match to the mystery player’s position.<br>
+      • <span class="yellow">Yellow in the height column</span> indicates the height is within 5cm of the mystery player’s height.<br>
+      • <span class="yellow">Yellow in the age or number</span> category indicates this attribute is within 2 of the mystery player. Notes <br>
+      </div>
+      <div id="htpRight">
+        <p>Notes</p>
+      • Only current AFL players who have played an AFL game are included. <br>
+      • Positions are based on champion data statistics, this is the same data used for AFL Fantasy, SuperCoach, etc.
+      </div>
+    </div>
+  </div>
+    </div>
     <div id="endPopup">
       <div id="imageDiv">
         <img id="playerImage">
@@ -126,6 +137,12 @@
       margin: 0;
       font-family: "Poppins";
       background-color: #fbfcfd;
+    }
+    .yellow{
+      background-color: yellow;
+    }
+    .green{
+      background-color: #7ed957;
     }
     #endPopup{
       width: 100vw;
@@ -253,11 +270,41 @@
       font-weight: bold;
       color: #545454;
       font-size: 1.2em;
-      width: 40vw;
+      width: 60vw;
       height: 70vh;
-      margin-left: 30vw;
-      margin-top: 20vh;
-      display: none;
+      margin-left: 20vw;
+      margin-top: 10vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #htpx{
+      display: flex;
+      justify-content: end;
+    }
+    #htpx p{
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+    #htpBoth{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50vw;
+      height: 70vh;
+      font-size: 0.8em;
+    }
+    #htpRight{
+      margin-left: 30px;
+      border: 1px solid #545454;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    #htpLeft{
+      margin-right: 30px;
+    }
+    #htpLeft p{
+      margin-top: 0;
     }
     #statsScreen{
       width: 40vw;
@@ -291,6 +338,7 @@
     #botContent{
       width: 100vw;
       height: 80vh;
+      display: none;
     }
     #botTop{
       width: 100vw;
@@ -641,6 +689,10 @@
       });
       $(document).on("click", "#xStatsBtn", function(){
         document.getElementById("statsScreen").style.display = "none";
+        document.getElementById("botContent").style.display = "block";
+      });
+      $(document).on("click", "#htpXBtn", function(){
+        document.getElementById("htpScreen").style.display = "none";
         document.getElementById("botContent").style.display = "block";
       });
       $(document).on("click", "#stats", function(){
