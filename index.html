@@ -697,6 +697,7 @@
         document.getElementById("botContent").style.display = "block";
       });
       $(document).on("click", "#stats", function(){
+        console.log(localStorage.getItem('gamesPlayed'));
         document.getElementById("gamesPlayedNumber").innerHTML = localStorage.getItem('gamesPlayed');
         document.getElementById("gamesWonNumber").innerHTML = localStorage.getItem('gamesWon');
         document.getElementById("statsScreen").style.display = "block";
