@@ -849,7 +849,11 @@
       input.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
           event.preventDefault();
-          console.log(input.value.length);
+          newPressed();
+        }
+      });
+      function newPressed(){
+        console.log(input.value.length);
           console.log(rightUsername.length);
           console.log(input.value.replace(/\s+/g, "") == rightUsername.replace(/\s+/g, ""));
           if (input.value != "") {
@@ -1057,8 +1061,8 @@
                         input.placeholder = "Guess "+chance + " of 8"
           },1000);
                   
-        }
-      });
+        
+      }
       function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -1091,6 +1095,7 @@
           b.addEventListener("click", function(e) {
               /*insert the value for the autocomplete text field:*/
               inp.value = this.getElementsByTagName("input")[0].value;
+              newPressed();
               /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
               closeAllLists();
