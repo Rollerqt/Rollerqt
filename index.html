@@ -850,7 +850,66 @@
                         
                         clone.children[0].innerHTML = username;
                         clone.children[1].children[0].setAttribute("src", "images/"+child.child("club").val()+".png");
-                        clone.children[1].children[1].innerHTML = child.child("club").val();
+                        switch(child.child("club").val()) {
+                        case "Adelaide":
+                        clone.children[1].children[1].innerHTML = "ADL";
+                          break;
+                        case "Brisbane":
+                        clone.children[1].children[1].innerHTML = "BRI";
+                          break;
+                          case "Carlton":
+                        clone.children[1].children[1].innerHTML = "CAR";
+                          break;
+                          case "Collingwood":
+                        clone.children[1].children[1].innerHTML = "COL";
+                          break;
+                          case "Essendon":
+                        clone.children[1].children[1].innerHTML = "ESS";
+                          break;
+                          case "Fremantle":
+                        clone.children[1].children[1].innerHTML = "FRE";
+                          break;
+                          case "Geelong":
+                        clone.children[1].children[1].innerHTML = "GEE";
+                          break;
+                          case "Gold Coast":
+                        clone.children[1].children[1].innerHTML = "GC";
+                          break;
+                          case "GWS":
+                        clone.children[1].children[1].innerHTML = "GWS";
+                          break;
+                          case "Hawthorn":
+                        clone.children[1].children[1].innerHTML = "HAW";
+                          break;
+                          case "Melbourne":
+                        clone.children[1].children[1].innerHTML = "MEL";
+                          break;
+                          case "North Melboune":
+                        clone.children[1].children[1].innerHTML = "NM";
+                          break;
+                          case "Port Adelaide":
+                        clone.children[1].children[1].innerHTML = "PA";
+                          break;
+                          case "Richmond":
+                        clone.children[1].children[1].innerHTML = "RIC";
+                          break;
+                          case "St Kilda":
+                        clone.children[1].children[1].innerHTML = "STK";
+                          break;
+                          case "West Coast":
+                        clone.children[1].children[1].innerHTML = "WCE";
+                          break;
+                          case "Sydney":
+                        clone.children[1].children[1].innerHTML = "SYD";
+                          break;
+                          case "Western Bulldogs":
+                        clone.children[1].children[1].innerHTML = "WB";
+                          break;
+
+                        default:
+                          // code block
+                      }
+                        
                         clone.children[2].innerHTML = child.child("region").val();
                         clone.children[3].innerHTML = child.child("position").val();
                         clone.children[4].children[0].innerHTML = age;
