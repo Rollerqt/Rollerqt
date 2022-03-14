@@ -309,7 +309,7 @@
     }
     #statsScreen{
       width: 40vw;
-      height: 35vh;
+      height: 40vh;
       margin-left: 30vw;
       margin-top: 15vh;
       border: 1px solid #545454;
@@ -624,8 +624,8 @@
       var rightHeight = "";
       var rightJerseyNumber = "";
       $(document).ready(function () {
-        // localStorage.setItem('gamesPlayed', 0);
-        // localStorage.setItem('gamesWon',0);
+        localStorage.setItem('gamesPlayed', 0);
+        localStorage.setItem('gamesWon',0);
       const usersRef = ref(db);
             onValue(usersRef, (snapshot) => {
             snapshot.forEach(function (child){
