@@ -404,7 +404,7 @@
     #dailyDown:hover{
       background-color: #7ed957;
       border: 1px solid #545454;
-      padding: 10px;
+      /* padding: 10px; */
       font-family: 'Montserrat';
     }
     #daily{
@@ -622,6 +622,20 @@
       font-size: 1em;
       right: 20;
       cursor: pointer;
+    }
+    @media only screen and (max-width: 700px) {
+      #aflLogoDiv{
+        display: none;
+      }
+      .dl{
+        font-size: 0.6em;
+      }
+      #dailyDown:hover{
+        background-color: white;
+      }
+      #unlimited p{
+        padding: 4px;
+      }
     }
   </style>
   <script type="module">
